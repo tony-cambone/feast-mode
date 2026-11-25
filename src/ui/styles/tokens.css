@@ -1,0 +1,127 @@
+/* =====================================================================
+   Design tokens. A candle-lit kitchen: warm near-black surfaces, cream
+   text, one accent (the plan's), and colour only where it means something.
+   ===================================================================== */
+:root {
+  /* ---- type ---- */
+  --ts: 1; /* text-size multiplier, Settings → Display */
+  --fs-xs: calc(14px * var(--ts));
+  --fs-sm: calc(16px * var(--ts));
+  --fs-md: calc(18px * var(--ts));
+  --fs-lg: calc(21px * var(--ts));
+  --fs-xl: calc(25px * var(--ts));
+  --fs-2xl: calc(31px * var(--ts));
+  --fs-3xl: calc(40px * var(--ts));
+  --fs-4xl: calc(52px * var(--ts));
+  --font-ui: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+  --font-mono: ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, monospace;
+
+  /* ---- space, shape ---- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-pill: 999px;
+  --tap: 56px; /* minimum tap target */
+  --pad: 14px; /* page gutter */
+  --gap: 14px; /* between panels */
+  --col-rail: clamp(300px, 24vw, 360px);
+  --col-board: clamp(340px, 29vw, 440px);
+
+  /* ---- accent: plan.theme.accent lands in --accent-src (set inline by the app) ---- */
+  --accent-src: #ffb454;
+  --accent-soft: color-mix(in oklab, var(--accent) 13%, transparent);
+  --accent-soft-2: color-mix(in oklab, var(--accent) 24%, transparent);
+  --accent-line: color-mix(in oklab, var(--accent) 42%, var(--line));
+  --accent-glow: color-mix(in oklab, var(--accent) 32%, transparent);
+  /* dark ink on light accents, light ink on dark ones */
+  --accent-ink: oklch(from var(--accent) clamp(0.17, (0.66 - l) * 1000, 0.985) 0.02 75);
+}
+
+/* ---------------- dark (default) ---------------- */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #100d0b;
+  --surface-1: #1a1613;
+  --surface-2: #25201b;
+  --surface-3: #332c25;
+  --line: #352e27;
+  --line-strong: #54493e;
+  --text: #f9f3e8; /* 15:1 on surface-1 */
+  --text-2: #d2c8b8; /* 10:1 */
+  --text-3: #a3988a; /* 5.9:1 */
+  --focus: #fff7e8;
+  --scrim: rgba(9, 6, 4, 0.74);
+
+  --accent: oklch(from var(--accent-src) clamp(0.56, l, 0.88) c h); /* fills */
+  --accent-text: oklch(from var(--accent-src) clamp(0.73, l, 0.93) c h); /* accent as text on dark */
+
+  /* semantic */
+  --ok: #8fdba6; /* done */
+  --ok-ink: #06220f;
+  --crit: #ff8376; /* critical, as text */
+  --crit-fill: #e23b2e; /* critical, as a fill */
+  --crit-ink: #fff8f5;
+  --heads: #ffcb57; /* heads-up, as a fill or border */
+  --heads-text: #ffd573;
+  --heads-ink: #241802;
+  --heads-deep: #2a2009;
+  --test: #b9a6ff; /* test mode */
+  --test-2: #ab96fb;
+  --test-text: #c9bbff;
+  --test-ink: #170e36;
+
+  --shadow-1: inset 0 1px 0 rgba(255, 244, 225, 0.035), 0 1px 2px rgba(0, 0, 0, 0.35);
+  --shadow-2: 0 28px 80px -12px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 244, 225, 0.04);
+}
+
+/* ---------------- light ---------------- */
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f3ecdf;
+  --surface-1: #fffbf4;
+  --surface-2: #f4ecde;
+  --surface-3: #e9dfcd;
+  --line: #e3d8c6;
+  --line-strong: #c8baa2;
+  --text: #201a13; /* 16:1 on surface-1 */
+  --text-2: #554b3d; /* 8.4:1 */
+  --text-3: #766b5c; /* 5:1 */
+  --focus: #201a13;
+  --scrim: rgba(60, 45, 28, 0.45);
+
+  --accent: oklch(from var(--accent-src) clamp(0.5, l, 0.8) c h);
+  --accent-text: oklch(from var(--accent-src) clamp(0.34, l, 0.5) c h);
+
+  --ok: #1d7a42;
+  --ok-ink: #ffffff;
+  --crit: #b3261c;
+  --crit-fill: #cf2f23;
+  --crit-ink: #ffffff;
+  --heads: #f2b233;
+  --heads-text: #7d4f00;
+  --heads-ink: #2b1c00;
+  --heads-deep: #fff3d2;
+  --test: #6a50e0;
+  --test-2: #5d43d6;
+  --test-text: #5b41d0;
+  --test-ink: #ffffff;
+
+  --shadow-1: 0 1px 2px rgba(80, 60, 30, 0.08), 0 0 0 1px rgba(80, 60, 30, 0.02);
+  --shadow-2: 0 28px 70px -14px rgba(60, 40, 15, 0.35), 0 0 0 1px rgba(80, 60, 30, 0.06);
+}
+
+/* ---------------- text size ---------------- */
+:root[data-text='s'] { --ts: 0.9; }
+:root[data-text='m'] { --ts: 1; }
+:root[data-text='l'] { --ts: 1.12; }
+:root[data-text='xl'] { --ts: 1.25; }

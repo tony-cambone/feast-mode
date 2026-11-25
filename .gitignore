@@ -1,0 +1,10 @@
+node_modules/
+dist/
+dist-single/
+test-results/
+playwright-report/
+.DS_Store
+*.log
+.claude/settings.local.json
+.claude/
+dist-e2e/

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <!-- The title and the tab icon are set at runtime: the app name from src/ui/brand.ts, the icon from the plan's emoji. -->
+    <title></title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍽️</text></svg>" />
+    <script>
+      // Apply the saved display options before first paint (no flash of the wrong theme).
+      try {
+        var d = JSON.parse(localStorage.getItem('tg:ui:display') || '{}');
+        var t = d.theme || 'dark';
+        if (t === 'auto') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+        document.documentElement.dataset.theme = t === 'light' ? 'light' : 'dark';
+        if (d.textSize) document.documentElement.dataset.text = d.textSize;
+      } catch (e) {}
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

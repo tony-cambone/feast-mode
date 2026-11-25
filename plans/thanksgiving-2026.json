@@ -1,0 +1,1584 @@
+{
+  "$schema": "./plan.schema.json",
+  "id": "thanksgiving-2026",
+  "title": "Thanksgiving 2026",
+  "emoji": "🦃",
+  "timeZone": "America/New_York",
+  "tempUnit": "F",
+  "days": [
+    {
+      "id": "wed",
+      "date": "2026-11-25",
+      "label": "Wed 11/25 · Prep"
+    },
+    {
+      "id": "thu",
+      "date": "2026-11-26",
+      "label": "Thu 11/26 · Cook"
+    }
+  ],
+  "devices": [
+    {
+      "id": "oven",
+      "label": "Oven"
+    },
+    {
+      "id": "traeger",
+      "label": "Traeger"
+    },
+    {
+      "id": "grill",
+      "label": "Propane grill",
+      "short": "Grill"
+    },
+    {
+      "id": "slowcooker",
+      "label": "Slow cooker"
+    },
+    {
+      "id": "stove",
+      "label": "Stove"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "wed-0900",
+      "day": "wed",
+      "time": "09:00",
+      "title": "Morning check: Tuesday items done?",
+      "details": "**Morning check:** Tuesday items done? Both turkeys spatchcocked and drying uncovered on racks in the fridge; gravy base made; cranberry sauce made. If not, do them first.",
+      "equipment": [
+        "fridge"
+      ],
+      "recipeIds": [
+        "gravy",
+        "cranberry"
+      ],
+      "critical": true
+    },
+    {
+      "id": "wed-0915",
+      "day": "wed",
+      "time": "09:15",
+      "title": "Bacon, then shallot + spinach",
+      "details": "Cook all the bacon (12 oz for quiche + a few extra slices for the mushrooms). Then cook shallot + spinach in 2 tbsp bacon fat; cool and wring the spinach dry.",
+      "equipment": [
+        "stove"
+      ],
+      "recipeIds": [
+        "quiche",
+        "mushrooms"
+      ],
+      "critical": false,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "stove",
+          "set": "MED",
+          "load": [
+            {
+              "id": "wed-stove-bacon",
+              "label": "Bacon, then shallot + spinach",
+              "forMin": 40
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wed-0930",
+      "day": "wed",
+      "time": "09:30",
+      "title": "Oven to 400°F · prick sweet potatoes",
+      "details": "Oven to 400°F. Prick the sweet potatoes.",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "sweet-potato"
+      ],
+      "critical": false,
+      "devices": [
+        {
+          "device": "oven",
+          "set": 400
+        }
+      ]
+    },
+    {
+      "id": "wed-0945",
+      "day": "wed",
+      "time": "09:45",
+      "title": "Sweet potatoes in (60 min) · prep mushrooms",
+      "details": "Sweet potatoes into the oven on a foil-lined sheet, 60 min. Wipe mushrooms, pull and chop the stems.",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "sweet-potato",
+        "mushrooms"
+      ],
+      "critical": false,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "load": [
+            {
+              "id": "wed-oven-sweetpotatoes",
+              "label": "Sweet potatoes",
+              "forMin": 60
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wed-1000",
+      "day": "wed",
+      "time": "10:00",
+      "title": "Mushroom caps in the oven (10 min)",
+      "details": "Mushroom caps into the oven gill-side down next to the sweet potatoes, 10 min.",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "mushrooms"
+      ],
+      "critical": false,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "load": [
+            {
+              "id": "wed-oven-caps",
+              "label": "Mushroom caps",
+              "forMin": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wed-1010",
+      "day": "wed",
+      "time": "10:10",
+      "title": "Flip caps · stems + filling · fill caps",
+      "details": "Flip the caps, pour off the liquid. Cook stems + garlic in butter until dry; cool; make the filling; fill caps; crumb topping; cover; fridge.",
+      "equipment": [
+        "stove",
+        "fridge"
+      ],
+      "recipeIds": [
+        "mushrooms"
+      ],
+      "critical": false,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "unload": [
+            "wed-oven-caps"
+          ]
+        },
+        {
+          "device": "stove",
+          "unload": "all",
+          "set": "MED",
+          "load": [
+            {
+              "id": "wed-stove-stems",
+              "label": "Mushroom stems + garlic",
+              "forMin": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wed-1045",
+      "day": "wed",
+      "time": "10:45",
+      "title": "Sweet potatoes out · oven to 375°F",
+      "details": "Sweet potatoes out. Oven to 375°F for the quiche crust. Scoop and mash the filling, spread in a buttered 9×13, cover, fridge. Bag the pecan topping separately.",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "sweet-potato"
+      ],
+      "critical": false,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "unload": [
+            "wed-oven-sweetpotatoes"
+          ],
+          "set": 375
+        }
+      ]
+    },
+    {
+      "id": "wed-1100",
+      "day": "wed",
+      "time": "11:00",
+      "title": "Blind-bake the quiche crust",
+      "details": "Blind-bake the quiche crust: 15 min with weights, then 5–8 min without.",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "quiche"
+      ],
+      "critical": false,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "load": [
+            {
+              "id": "wed-oven-crust",
+              "label": "Quiche crust (blind-bake)",
+              "forMin": 23
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wed-1125",
+      "day": "wed",
+      "time": "11:25",
+      "title": "Crust out · oven to 350°F · quiche in",
+      "details": "Crust out; oven to 350°F. Layer cheese, bacon, spinach, cheese; pour the custard. Quiche in on a sheet pan, 45–55 min.",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "quiche"
+      ],
+      "critical": false,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "unload": [
+            "wed-oven-crust"
+          ],
+          "set": 350,
+          "load": [
+            {
+              "id": "wed-oven-quiche",
+              "label": "Bacon-spinach quiche",
+              "forMin": 50
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wed-1215",
+      "day": "wed",
+      "time": "12:15",
+      "title": "Check the quiche · pull and cool",
+      "details": "Check the quiche: edges set, center slightly jiggly. Pull it and cool 1 hr, then cover and refrigerate (reminder at 13:15).",
+      "equipment": [
+        "oven",
+        "counter"
+      ],
+      "recipeIds": [
+        "quiche"
+      ],
+      "critical": false,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "unload": [
+            "wed-oven-quiche"
+          ],
+          "set": "OFF"
+        }
+      ]
+    },
+    {
+      "id": "wed-1230",
+      "day": "wed",
+      "time": "12:30",
+      "title": "Lunch break",
+      "details": "Lunch break.",
+      "critical": false
+    },
+    {
+      "id": "wed-1300",
+      "day": "wed",
+      "time": "13:00",
+      "title": "Mashed potatoes: peel, boil, mash",
+      "details": "Mashed potatoes: peel, boil, mash, into the buttered slow-cooker insert, fridge.",
+      "equipment": [
+        "stove"
+      ],
+      "recipeIds": [
+        "mashed"
+      ],
+      "critical": false,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "stove",
+          "unload": "all",
+          "set": "HIGH",
+          "load": [
+            {
+              "id": "wed-stove-potatoes",
+              "label": "Potatoes (boil)",
+              "forMin": 30
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wed-1315",
+      "day": "wed",
+      "time": "13:15",
+      "title": "Quiche into the fridge",
+      "details": "Quiche into the fridge (quiet reminder).",
+      "equipment": [
+        "fridge"
+      ],
+      "recipeIds": [
+        "quiche"
+      ],
+      "alert": "quiet",
+      "critical": false
+    },
+    {
+      "id": "wed-1400",
+      "day": "wed",
+      "time": "14:00",
+      "title": "Check bread cubes · stuffing base",
+      "details": "Check the bread cubes. Bottom cubes still soft? Toast at 250°F for 20–30 min first. Then make the stuffing base: sausage, vegetables, toss with bread, split into the two foil pans, cover, fridge. **No eggs or stock yet.**",
+      "equipment": [
+        "stove",
+        "oven"
+      ],
+      "recipeIds": [
+        "stuffing"
+      ],
+      "critical": false,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "stove",
+          "unload": "all",
+          "set": "MED",
+          "load": [
+            {
+              "id": "wed-stove-sausage",
+              "label": "Sausage + vegetables",
+              "forMin": 30
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wed-1500",
+      "day": "wed",
+      "time": "15:00",
+      "title": "Assemble green bean casserole",
+      "details": "Green bean casserole: assemble the 4-can version in a 9×13, cover, fridge. Keep the remaining onions sealed.",
+      "equipment": [
+        "fridge"
+      ],
+      "recipeIds": [
+        "green-beans"
+      ],
+      "critical": false
+    },
+    {
+      "id": "wed-1530",
+      "day": "wed",
+      "time": "15:30",
+      "title": "Cocktail sauce · thaw/poach shrimp",
+      "details": "Cocktail sauce; thaw the shrimp (and poach if raw); fridge.",
+      "equipment": [
+        "stove",
+        "fridge"
+      ],
+      "recipeIds": [
+        "shrimp"
+      ],
+      "critical": false,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "stove",
+          "unload": "all",
+          "set": "MED",
+          "load": [
+            {
+              "id": "wed-stove-shrimp",
+              "label": "Shrimp (poach if raw)",
+              "forMin": 10
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wed-1600",
+      "day": "wed",
+      "time": "16:00",
+      "title": "Set the table · side table · cooler",
+      "details": "Set the table; put a sticky note in each serving dish with its name. Clear the side table for guest food. Set up the drinks cooler.",
+      "critical": false,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "stove",
+          "unload": "all",
+          "set": "OFF"
+        }
+      ]
+    },
+    {
+      "id": "wed-1700",
+      "day": "wed",
+      "time": "17:00",
+      "title": "Equipment check (big bird, pellets, gas)",
+      "details": "**Equipment check:** spatchcocked big bird fits flat on the Traeger? Pellets full plus a spare bag? Probe thermometer batteries? Propane tank has gas? Empty cooler + old towels ready for the turkey hold?",
+      "equipment": [
+        "traeger",
+        "grill"
+      ],
+      "recipeIds": [
+        "turkeys"
+      ],
+      "fallbackIds": [
+        "whole-bird"
+      ],
+      "critical": true
+    },
+    {
+      "id": "wed-2100",
+      "day": "wed",
+      "time": "21:00",
+      "title": "Bedtime fridge check",
+      "details": "**Bedtime fridge check:** everything covered except the turkeys, which stay uncovered on racks.",
+      "equipment": [
+        "fridge"
+      ],
+      "critical": true
+    },
+    {
+      "id": "thu-0700",
+      "day": "thu",
+      "time": "07:00",
+      "title": "Butter out to soften",
+      "details": "Butter out to soften for the herb butter (2.5 sticks: 1 for the oven bird, 1.5 for the Traeger bird).",
+      "equipment": [
+        "counter"
+      ],
+      "recipeIds": [
+        "herb-butter"
+      ],
+      "critical": true
+    },
+    {
+      "id": "thu-0800",
+      "day": "thu",
+      "time": "08:00",
+      "title": "Turkeys out · pellets · herb butter",
+      "details": "Turkeys out of the fridge. Check the pellet hopper is full. Make the herb butter.",
+      "equipment": [
+        "counter",
+        "traeger"
+      ],
+      "recipeIds": [
+        "herb-butter"
+      ],
+      "critical": true
+    },
+    {
+      "id": "thu-0830",
+      "day": "thu",
+      "time": "08:30",
+      "title": "Herb butter on the 19.4 lb bird",
+      "details": "Herb butter on the 19.4 lb bird: half under the skin, half on top. Rack over a sheet pan with onion, carrot, celery, and 2 cups stock.",
+      "equipment": [
+        "counter"
+      ],
+      "recipeIds": [
+        "turkeys"
+      ],
+      "critical": true
+    },
+    {
+      "id": "thu-0845",
+      "day": "thu",
+      "time": "08:45",
+      "title": "Traeger on at 325°F",
+      "details": "Start the Traeger at 325°F, lid closed. Melt butter for basting.",
+      "equipment": [
+        "traeger"
+      ],
+      "recipeIds": [
+        "turkeys"
+      ],
+      "fallbackIds": [
+        "whole-bird"
+      ],
+      "critical": true,
+      "devices": [
+        {
+          "device": "traeger",
+          "set": 325
+        }
+      ]
+    },
+    {
+      "id": "thu-0915",
+      "day": "thu",
+      "time": "09:15",
+      "title": "19.4 lb turkey on the Traeger",
+      "details": "**19.4 lb turkey on the Traeger.** Probe in the thickest part of the breast, not touching bone.",
+      "equipment": [
+        "traeger"
+      ],
+      "recipeIds": [
+        "turkeys"
+      ],
+      "fallbackIds": [
+        "whole-bird"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "traeger",
+          "load": [
+            {
+              "id": "thu-traeger-turkey",
+              "label": "19.4 lb turkey",
+              "forMin": 210
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thu-0945",
+      "day": "thu",
+      "time": "09:45",
+      "title": "Herb butter on the 15.6 lb bird",
+      "details": "Herb butter on the 15.6 lb bird; rack over a sheet pan with vegetables and stock.",
+      "equipment": [
+        "counter"
+      ],
+      "recipeIds": [
+        "turkeys"
+      ],
+      "critical": true
+    },
+    {
+      "id": "thu-1000",
+      "day": "thu",
+      "time": "10:00",
+      "title": "Oven to 425°F · casseroles out",
+      "details": "Oven to 425°F. Casseroles (stuffing pans, sweet potato, green beans) out of the fridge to take the chill off.",
+      "equipment": [
+        "oven"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "set": 425
+        }
+      ]
+    },
+    {
+      "id": "thu-1015",
+      "day": "thu",
+      "time": "10:15",
+      "title": "15.6 lb turkey into the 425°F oven",
+      "details": "**15.6 lb turkey into the 425°F oven**, middle rack, probe in the breast. Rotate the pan once halfway (~11:05). Tent the breast if it browns too fast. Baste the Traeger bird.",
+      "equipment": [
+        "oven",
+        "traeger"
+      ],
+      "recipeIds": [
+        "turkeys"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "load": [
+            {
+              "id": "thu-oven-turkey",
+              "label": "15.6 lb turkey",
+              "forMin": 105
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thu-1100",
+      "day": "thu",
+      "time": "11:00",
+      "title": "Potatoes into slow cooker · gravy pot",
+      "details": "Mashed potatoes into the slow cooker on LOW with 2 tbsp butter on top. Gravy base into a pot on the stove (not heated yet). Quiche out of the fridge. Check pellets.",
+      "equipment": [
+        "slowcooker",
+        "stove"
+      ],
+      "recipeIds": [
+        "mashed",
+        "gravy",
+        "quiche"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "slowcooker",
+          "set": "LOW",
+          "load": [
+            {
+              "id": "thu-slowcooker-mashed",
+              "label": "Mashed potatoes"
+            }
+          ]
+        },
+        {
+          "device": "stove",
+          "load": [
+            {
+              "id": "thu-stove-gravy",
+              "label": "Gravy pot (not heated)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thu-1105",
+      "day": "thu",
+      "time": "11:05",
+      "title": "Rotate the oven turkey pan",
+      "details": "Rotate the oven turkey pan.",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "turkeys"
+      ],
+      "alert": "modal",
+      "critical": false
+    },
+    {
+      "id": "thu-1115",
+      "day": "thu",
+      "time": "11:15",
+      "title": "Baste the Traeger bird",
+      "details": "Baste the Traeger bird.",
+      "equipment": [
+        "traeger"
+      ],
+      "recipeIds": [
+        "turkeys"
+      ],
+      "alert": "modal",
+      "critical": false
+    },
+    {
+      "id": "thu-1130",
+      "day": "thu",
+      "time": "11:30",
+      "title": "Baste oven bird · stuffing wet mix",
+      "details": "Baste the oven turkey. **Stuffing:** whisk 4 eggs into 4 cups stock, pour over both pans, toss, add stock until moist, soak 15 min. Clear the side table; drinks cooler out.",
+      "equipment": [
+        "oven",
+        "counter"
+      ],
+      "recipeIds": [
+        "stuffing"
+      ],
+      "critical": true
+    },
+    {
+      "id": "thu-potato-stir",
+      "day": "thu",
+      "time": "11:30",
+      "title": "Stir the mashed potatoes",
+      "details": "**Repeat every 30 min:** stir the mashed potatoes; add warm milk if stiff.",
+      "equipment": [
+        "slowcooker"
+      ],
+      "recipeIds": [
+        "mashed"
+      ],
+      "alert": "modal",
+      "critical": false,
+      "repeatEveryMin": 30,
+      "repeatUntil": "13:30"
+    },
+    {
+      "id": "thu-1145",
+      "day": "thu",
+      "time": "11:45",
+      "title": "Check the oven turkey temp",
+      "details": "Check the oven turkey temp: target 160°F breast / 175°F thigh.",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "turkeys"
+      ],
+      "fallbackIds": [
+        "oven-turkey-late"
+      ],
+      "critical": true
+    },
+    {
+      "id": "thu-1200",
+      "day": "thu",
+      "time": "12:00",
+      "title": "Oven turkey OUT · oven 375°F · stuffing in",
+      "details": "**Oven turkey OUT** once at temp (if not, leave it in; see fallback below). Tent with foil + towel, or hold it in the empty cooler with towels. Crack the oven door to drop to **375°F**. **Stuffing in, covered**, one pan per rack. Check the Traeger bird temp.",
+      "equipment": [
+        "oven",
+        "traeger"
+      ],
+      "recipeIds": [
+        "turkeys",
+        "stuffing"
+      ],
+      "fallbackIds": [
+        "oven-turkey-late",
+        "traeger-slow"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "unload": "all",
+          "set": 375,
+          "load": [
+            {
+              "id": "thu-oven-stuffing-1",
+              "label": "Stuffing pan 1",
+              "forMin": 55
+            },
+            {
+              "id": "thu-oven-stuffing-2",
+              "label": "Stuffing pan 2",
+              "forMin": 55
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thu-1215",
+      "day": "thu",
+      "time": "12:15",
+      "title": "Mushrooms out · baste Traeger bird",
+      "details": "Stuffed mushrooms out of the fridge. Baste the Traeger bird.",
+      "equipment": [
+        "counter"
+      ],
+      "recipeIds": [
+        "mushrooms"
+      ],
+      "alert": "modal",
+      "critical": false
+    },
+    {
+      "id": "thu-1220",
+      "day": "thu",
+      "time": "12:20",
+      "title": "Light the propane grill (~375°F)",
+      "details": "Light the propane grill: **one side only**, lid closed, aim for ~375°F.",
+      "equipment": [
+        "grill"
+      ],
+      "recipeIds": [
+        "mushrooms"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "grill",
+          "set": 375
+        }
+      ]
+    },
+    {
+      "id": "thu-1225",
+      "day": "thu",
+      "time": "12:25",
+      "title": "Uncover the stuffing",
+      "details": "**Uncover the stuffing** for its last 20–30 min.",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "stuffing"
+      ],
+      "critical": true
+    },
+    {
+      "id": "thu-1235",
+      "day": "thu",
+      "time": "12:35",
+      "title": "Mushrooms on the grill (unlit side)",
+      "details": "**Mushrooms on the grill**, metal sheet pan on the **unlit side**, lid closed, 15–20 min.",
+      "equipment": [
+        "grill"
+      ],
+      "recipeIds": [
+        "mushrooms"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "grill",
+          "load": [
+            {
+              "id": "thu-grill-mushrooms",
+              "label": "Stuffed mushrooms",
+              "forMin": 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thu-1245",
+      "day": "thu",
+      "time": "12:45",
+      "title": "Traeger turkey OFF · Traeger shut down",
+      "details": "**Traeger turkey OFF** when breast 160°F / thigh 175°F. Tent loosely; rest 30–45 min. Save the drippings. Shut the Traeger down.",
+      "equipment": [
+        "traeger"
+      ],
+      "recipeIds": [
+        "turkeys"
+      ],
+      "fallbackIds": [
+        "oven-turkey-late",
+        "traeger-slow"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "traeger",
+          "unload": "all",
+          "set": "OFF"
+        }
+      ]
+    },
+    {
+      "id": "thu-1255",
+      "day": "thu",
+      "time": "12:55",
+      "title": "Stuffing out · casseroles in at 350°F",
+      "details": "**Stuffing OUT** (center 165°F); keep covered. Crack the oven door to drop to **350°F**. **Sweet potato casserole (topping on) + green bean casserole in.**",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "stuffing",
+        "sweet-potato",
+        "green-beans"
+      ],
+      "fallbackIds": [
+        "oven-turkey-late"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "unload": "all",
+          "set": 350,
+          "load": [
+            {
+              "id": "thu-oven-sweetpotato",
+              "label": "Sweet potato casserole",
+              "forMin": 40
+            },
+            {
+              "id": "thu-oven-greenbean",
+              "label": "Green bean casserole",
+              "forMin": 30
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thu-1255-grill",
+      "day": "thu",
+      "time": "12:55",
+      "title": "Mushrooms off the grill · grill off",
+      "details": "Mushrooms off the grill when bubbling and golden; grill off.",
+      "equipment": [
+        "grill"
+      ],
+      "recipeIds": [
+        "mushrooms"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "grill",
+          "unload": "all",
+          "set": "OFF"
+        }
+      ]
+    },
+    {
+      "id": "thu-1300",
+      "day": "thu",
+      "time": "13:00",
+      "title": "Guests arrive · appetizers out",
+      "details": "**Guests arrive.** Shrimp on ice with sauce and lemon; quiche, mushrooms, and cranberry sauce out. Desserts to the side table, drinks in the cooler.",
+      "recipeIds": [
+        "shrimp"
+      ],
+      "critical": true
+    },
+    {
+      "id": "thu-1310",
+      "day": "thu",
+      "time": "13:10",
+      "title": "Heat the gravy · add drippings slowly",
+      "details": "Heat the gravy; whisk in strained drippings **a little at a time, tasting**. The injected birds make salty drippings.",
+      "equipment": [
+        "stove"
+      ],
+      "recipeIds": [
+        "gravy"
+      ],
+      "critical": true,
+      "devices": [
+        {
+          "device": "stove",
+          "set": "MED-LOW"
+        }
+      ]
+    },
+    {
+      "id": "thu-1320",
+      "day": "thu",
+      "time": "13:20",
+      "title": "Green beans: stir + onions · start carving",
+      "details": "Green beans: stir, top with the remaining fried onions, back in for 5 min. **Start carving, oven turkey first.**",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "green-beans"
+      ],
+      "critical": true,
+      "headsUpMin": 5
+    },
+    {
+      "id": "thu-1335",
+      "day": "thu",
+      "time": "13:35",
+      "title": "Casseroles out · oven off",
+      "details": "Casseroles out. Final stir of the potatoes. Oven off.",
+      "equipment": [
+        "oven"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "unload": "all",
+          "set": "OFF"
+        }
+      ]
+    },
+    {
+      "id": "thu-1345",
+      "day": "thu",
+      "time": "13:45",
+      "title": "Everything to the table · gravy in pitcher",
+      "details": "Everything to the table. Gravy into a warmed pitcher.",
+      "equipment": [
+        "slowcooker",
+        "stove"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "slowcooker",
+          "unload": "all",
+          "set": "OFF"
+        },
+        {
+          "device": "stove",
+          "unload": "all",
+          "set": "OFF"
+        }
+      ]
+    },
+    {
+      "id": "thu-1400",
+      "day": "thu",
+      "time": "14:00",
+      "title": "Dinner! 🦃",
+      "details": "**Dinner.** 🦃",
+      "critical": true
+    },
+    {
+      "id": "thu-1500",
+      "day": "thu",
+      "time": "15:00",
+      "title": "Leftovers into the fridge",
+      "details": "Leftovers into the fridge (food safety: within ~2 hrs).",
+      "equipment": [
+        "fridge"
+      ],
+      "critical": true
+    }
+  ],
+  "recipes": [
+    {
+      "id": "herb-butter",
+      "name": "Herb butter",
+      "yield": "2.5 batches (1 for the 15.6 lb bird, 1.5 for the 19.4 lb bird)",
+      "when": "Thursday 08:00",
+      "ingredients": [
+        {
+          "heading": "Per batch"
+        },
+        "1 stick softened butter",
+        "4 cloves garlic, grated",
+        "1 tbsp each chopped sage, thyme, rosemary",
+        "1 tsp smoked paprika",
+        "zest of 1 lemon",
+        "black pepper"
+      ],
+      "steps": [
+        "Mash everything together.",
+        "Rub half under the skin, half on top. **No salt**; the birds are pre-injected."
+      ]
+    },
+    {
+      "id": "turkeys",
+      "name": "Two spatchcocked turkeys (Traeger + oven)",
+      "when": "Spatchcocked and drying since Tuesday; cook Thursday.",
+      "ingredients": [
+        {
+          "heading": "Setup per bird"
+        },
+        "Rack over a rimmed sheet pan / roasting pan",
+        "1 rough-chopped onion",
+        "1 carrot",
+        "1 celery stalk",
+        "2 cups stock"
+      ],
+      "steps": [
+        {
+          "heading": "Traeger (19.4 lb)"
+        },
+        "325°F, ~3–3.5 hr.",
+        "Hickory, apple, or turkey-blend pellets; keep a spare bag nearby (cold air burns pellets faster).",
+        "Baste with melted butter hourly. Add stock if the pan runs dry.",
+        {
+          "heading": "Oven (15.6 lb)"
+        },
+        "425°F, middle rack, ~100–110 min.",
+        "Rotate once halfway.",
+        "Tent the breast if it browns too fast.",
+        {
+          "heading": "Done"
+        },
+        "Breast 160°F, thigh 175°F (carryover takes the breast to 165°F).",
+        "Rest 30–45 min (the oven bird rests ~80 min; hold it in a cooler with towels to keep it hot).",
+        "**Go by the probe, not the clock.**"
+      ],
+      "notes": [
+        "Pre-injected, so no brine, no salt.",
+        "Save the drippings from both pans for the gravy."
+      ]
+    },
+    {
+      "id": "gravy",
+      "name": "Make-ahead turkey gravy",
+      "yield": "~10 cups",
+      "when": "Base made Tuesday; finished Thursday 13:10.",
+      "ingredients": [
+        "10 cups low-sodium chicken or turkey bone broth",
+        "¾ cup butter",
+        "¾ cup flour",
+        "salt, pepper",
+        "splash of apple cider vinegar",
+        "optional: necks, giblets (not the liver), backbones, 1 onion, 1 carrot, 1 celery stalk, thyme, 1 bay leaf"
+      ],
+      "steps": [
+        "Optional: simmer the broth with the necks, backbones, vegetables, and herbs for 1 hr; strain.",
+        "Melt the butter, whisk in the flour, cook 3–4 min until peanut-butter colored.",
+        "Whisk in the hot broth a ladle at a time; simmer 10 min until it coats a spoon; season; refrigerate.",
+        "**Thursday:** reheat; skim and strain in the drippings from both birds **a little at a time, tasting** (salty from the injection); finish with a splash of vinegar."
+      ]
+    },
+    {
+      "id": "mashed",
+      "name": "Mashed potatoes",
+      "yield": "18 servings",
+      "when": "Make Wednesday; slow cooker Thursday from 11:00.",
+      "ingredients": [
+        "9 lb Yukon Gold (peeled, 2-inch chunks)",
+        "1.5 sticks butter + 2 tbsp for reheating",
+        "1.5 cups warm heavy cream or whole milk",
+        "8 oz cream cheese",
+        "½ cup sour cream",
+        "1 tbsp kosher salt to start",
+        "black pepper",
+        "chives to finish"
+      ],
+      "steps": [
+        "Cover with cold, well-salted water; boil 15–20 min until fork-tender.",
+        "Drain; steam-dry in the pot 2 min.",
+        "Mash or rice; stir in the butter, cream cheese, and sour cream, then the cream; season.",
+        "Spread in a buttered slow-cooker insert; refrigerate.",
+        "**Thursday:** LOW from 11:00 with 2 tbsp butter on top; stir every 30 min; add warm milk if stiff."
+      ]
+    },
+    {
+      "id": "stuffing",
+      "name": "Sourdough sage-and-sausage stuffing",
+      "yield": "two 9×13 foil pans",
+      "when": "Wednesday steps 1–3 + split into pans; Thursday 11:30 add the wet; bake 12:00.",
+      "ingredients": [
+        "2 lb sourdough, 1-inch cubes, dried 1–2 days",
+        "1 lb bulk breakfast sausage",
+        "1 stick butter",
+        "2 onions + 4 celery stalks, diced",
+        "4 cloves garlic, minced",
+        "2 tbsp fresh sage, 1 tbsp fresh thyme, ¼ cup parsley, chopped",
+        "4 eggs",
+        "4–5 cups stock",
+        "1.5 tsp salt",
+        "1 tsp pepper"
+      ],
+      "steps": [
+        "Brown the sausage, breaking it up; set aside.",
+        "Melt the butter in the same pan; cook the onion and celery 8 min; add the garlic and herbs for 1 min.",
+        "Toss the bread, sausage, and vegetables; split between the two buttered pans; cover; refrigerate.",
+        "**Thursday 11:30:** whisk the eggs into 4 cups stock; pour over and toss; add more stock until moist but not soggy; soak 15 min.",
+        "**Bake at 375°F:** covered 25 min, uncovered 20–30 min, until the center reads 165°F and the top is crisp."
+      ],
+      "notes": [
+        "If the bread cubes are still soft Wednesday, toast them at 250°F for 20–30 min first."
+      ]
+    },
+    {
+      "id": "green-beans",
+      "name": "Classic green bean casserole",
+      "yield": "4-can version, one 9×13",
+      "when": "Assemble Wednesday; bake Thursday 12:55.",
+      "ingredients": [
+        "4 cans (14.5 oz) French-style green beans, **drained very well**",
+        "2 cans (10.5 oz) Campbell's condensed cream of mushroom soup",
+        "1 cup milk",
+        "2 tsp soy sauce",
+        "¼ tsp black pepper",
+        "about 2⅔ cups French's crispy fried onions (one 6 oz container), divided"
+      ],
+      "steps": [
+        "Stir the soup, milk, soy sauce, and pepper.",
+        "Fold in the beans and half the onions.",
+        "Spread in a 9×13; cover; refrigerate. Keep the remaining onions sealed.",
+        "**Thursday:** 350°F for 25 min; stir; top with the remaining onions; bake 5 more min."
+      ],
+      "notes": [
+        "Press the canned beans in the colander to drain them well so the casserole isn't soupy."
+      ]
+    },
+    {
+      "id": "sweet-potato",
+      "name": "Sweet potato casserole with pecan crumble",
+      "yield": "one 9×13",
+      "when": "Roast and assemble Wednesday; bake Thursday 12:55.",
+      "ingredients": [
+        {
+          "heading": "Filling"
+        },
+        "6 lb sweet potatoes",
+        "1 stick butter, melted",
+        "⅓ cup maple syrup",
+        "½ cup heavy cream",
+        "2 eggs",
+        "1 tsp vanilla",
+        "1 tsp cinnamon",
+        "¼ tsp nutmeg",
+        "1 tsp salt",
+        {
+          "heading": "Topping"
+        },
+        "2 cups chopped pecans",
+        "¾ cup brown sugar",
+        "½ cup flour",
+        "6 tbsp melted butter",
+        "½ tsp cinnamon",
+        "pinch of salt"
+      ],
+      "steps": [
+        "Prick the potatoes; roast on a foil-lined sheet at 400°F for 60 min until very soft.",
+        "Scoop and mash with all the filling ingredients.",
+        "Spread in a buttered 9×13; cover; refrigerate; topping in a separate bag.",
+        "**Thursday:** scatter the topping; 350°F for 35–40 min until set and the pecans are toasted."
+      ],
+      "notes": [
+        "Marshmallows on one end for the last 5–10 min if the kids want them (check the label for dyes)."
+      ]
+    },
+    {
+      "id": "cranberry",
+      "name": "Fresh cranberry-orange sauce",
+      "yield": "about 2.5 cups",
+      "when": "Made Tuesday; out of the fridge Thursday ~13:00.",
+      "ingredients": [
+        "12 oz fresh cranberries",
+        "¾ cup maple syrup (or sugar)",
+        "zest + juice of 1 orange",
+        "¼ cup water",
+        "pinch of salt",
+        "optional cinnamon stick or 1 tsp grated ginger"
+      ],
+      "steps": [
+        "Zest, then juice the orange.",
+        "Simmer the juice, water, maple syrup, salt, and cinnamon.",
+        "Add the berries; simmer 8–10 min until most pop.",
+        "Off heat, stir in the zest; remove the cinnamon; taste.",
+        "Cool; refrigerate (it sets as it cools).",
+        "Thursday: serve cold or take the chill off."
+      ]
+    },
+    {
+      "id": "quiche",
+      "name": "Bacon-spinach quiche",
+      "yield": "9-inch deep dish, 12 thin wedges",
+      "when": "Bake Wednesday; out of the fridge Thursday 11:00; served at room temp.",
+      "ingredients": [
+        "9-inch deep-dish pie crust",
+        "12 oz bacon",
+        "5 oz baby spinach",
+        "1 shallot, minced",
+        "6 oz Gruyère, shredded (~1.5 cups)",
+        "6 large eggs",
+        "1 cup heavy cream + 1 cup whole milk",
+        "¾ tsp kosher salt, ¼ tsp pepper, pinch of nutmeg"
+      ],
+      "steps": [
+        "Blind-bake: prick, line with foil, add weights; 375°F for 15 min; remove the weights; 5–8 min more; drop the oven to 350°F.",
+        "Cook the bacon crisp; drain; chop. Keep 2 tbsp fat; cook the shallot 2 min, then the spinach until wilted.",
+        "Cool the spinach and wring it out hard in a towel.",
+        "Whisk the eggs, cream, milk, salt, pepper, and nutmeg.",
+        "Half the cheese, then bacon + spinach, then the rest of the cheese; pour the custard over.",
+        "On a sheet pan, 350°F for 45–55 min until the edges are set and the center slightly jiggles; tent the crust if needed.",
+        "Cool ≥1 hr; cover; refrigerate."
+      ]
+    },
+    {
+      "id": "mushrooms",
+      "name": "Stuffed mushrooms",
+      "yield": "~24",
+      "when": "Assemble Wednesday; propane grill Thursday 12:35.",
+      "ingredients": [
+        "~2 lb large white or cremini stuffing mushrooms (~24)",
+        "3 tbsp butter, divided",
+        "3 cloves garlic, minced",
+        "8 oz cream cheese, softened",
+        "½ cup finely grated Parmesan + 2 tbsp for topping",
+        "2 tbsp chopped parsley, 1 tsp chopped thyme",
+        "¼ tsp kosher salt, pepper",
+        "optional ¼ cup crumbled bacon",
+        "½ cup fine crumbs from the stuffing sourdough"
+      ],
+      "steps": [
+        "Wipe the mushrooms; pull and finely chop the stems.",
+        "Roast the caps gill-side down at 400°F for 10 min; flip; pour off the liquid.",
+        "Cook the stems and garlic in 2 tbsp butter 5–6 min until dry; cool.",
+        "Mix with the cream cheese, ½ cup Parmesan, herbs, salt, pepper, and bacon.",
+        "Fill each cap; toss the crumbs with 1 tbsp melted butter + 2 tbsp Parmesan; press on top.",
+        "Cover; refrigerate. **Thursday:** propane grill, one side lit, ~375°F; mushrooms on a **metal** sheet pan on the unlit side, lid closed, 15–20 min until bubbling. For more color, move them over the flame for the last 1–2 min and watch closely."
+      ]
+    },
+    {
+      "id": "shrimp",
+      "name": "Shrimp cocktail",
+      "when": "Sauce + shrimp prep Wednesday; serve Thursday 13:00.",
+      "ingredients": [
+        {
+          "heading": "Sauce"
+        },
+        "1 cup ketchup (check the label for dyes)",
+        "3 tbsp prepared horseradish",
+        "1 tbsp lemon juice",
+        "1 tsp Worcestershire",
+        "a few dashes of hot sauce"
+      ],
+      "steps": [
+        "Stir the sauce together and chill.",
+        "Thaw the shrimp in cold water 20–30 min; if raw, poach 2–3 min in simmering salted water with a halved lemon until pink, then into an ice bath; drain; refrigerate.",
+        "Thursday 13:00: platter over ice with the sauce and lemon wedges."
+      ]
+    }
+  ],
+  "fallbacks": [
+    {
+      "id": "oven-turkey-late",
+      "title": "Oven turkey not at temp by 12:00",
+      "body": [
+        "Leave it in. Bake the stuffing on the Traeger at 350°F after the big bird comes off at 12:45, and the oven stays on schedule for the casseroles.",
+        "Applying the fallback re-times those tasks: the oven bird stays in past 12:00, comes out around 12:30 (oven drops to 350°F), the Traeger goes to 350°F at 12:45 instead of shutting down, and the stuffing goes onto the Traeger at 12:50."
+      ],
+      "relatedTaskIds": [
+        "thu-1145",
+        "thu-1200",
+        "thu-1245",
+        "thu-1255"
+      ],
+      "actions": [
+        {
+          "kind": "variant",
+          "variantId": "oven-turkey-late",
+          "label": "Apply fallback: stuffing on the Traeger"
+        }
+      ]
+    },
+    {
+      "id": "traeger-slow",
+      "title": "Traeger bird running slow",
+      "body": [
+        "Go by the probe, not the clock. Cold or windy weather adds 20–30 min.",
+        "Shift the Traeger lane."
+      ],
+      "relatedTaskIds": [
+        "thu-1200",
+        "thu-1245"
+      ],
+      "actions": [
+        {
+          "kind": "shiftLane",
+          "lane": "traeger",
+          "minutes": 15,
+          "label": "Traeger lane +15 min"
+        },
+        {
+          "kind": "shiftLane",
+          "lane": "traeger",
+          "minutes": 30,
+          "label": "Traeger lane +30 min"
+        }
+      ]
+    },
+    {
+      "id": "whole-bird",
+      "title": "Big bird won't lie flat on the Traeger",
+      "body": [
+        "Smoke it whole, 4–4.5 hr, on by 08:30.",
+        "The button shifts only the early Traeger-chain tasks (08:00, 08:30, 08:45, 09:15) 45 min earlier. It does not move the whole lane, which would wrongly move the 12:45 shutdown too: the whole bird needs 4–4.5 hr, so it still comes off around 12:30–13:00. Go by the probe."
+      ],
+      "relatedTaskIds": [
+        "wed-1700",
+        "thu-0845",
+        "thu-0915"
+      ],
+      "actions": [
+        {
+          "kind": "shiftTasks",
+          "taskIds": [
+            "thu-0800",
+            "thu-0830",
+            "thu-0845",
+            "thu-0915"
+          ],
+          "minutes": -45,
+          "label": "Shift Traeger start −45 min"
+        }
+      ]
+    }
+  ],
+  "variants": [
+    {
+      "id": "oven-turkey-late",
+      "label": "Oven turkey late: stuffing on the Traeger",
+      "override": {
+        "thu-1200": {
+          "title": "Check Traeger bird temp · oven turkey stays in",
+          "details": "Oven turkey is **not at temp yet: leave it in.** Stuffing waits (it goes on the Traeger at 12:50). Check the Traeger bird temp.",
+          "equipment": [
+            "oven"
+          ],
+          "devices": [],
+          "headsUpMin": 0
+        },
+        "thu-1245": {
+          "title": "Traeger turkey OFF · Traeger to 350°F",
+          "details": "**Traeger turkey OFF** when breast 160°F / thigh 175°F. Tent loosely; rest 30–45 min. Save the drippings. **Leave the Traeger on and set it to 350°F** for the stuffing.",
+          "devices": [
+            {
+              "device": "traeger",
+              "unload": "all",
+              "set": 350
+            }
+          ]
+        },
+        "thu-1255": {
+          "title": "Casseroles in at 350°F",
+          "details": "Oven should already be dropping to **350°F**. **Sweet potato casserole (topping on) + green bean casserole in.** (Stuffing is on the Traeger.)",
+          "recipeIds": [
+            "sweet-potato",
+            "green-beans"
+          ]
+        }
+      },
+      "remove": [
+        "thu-1225"
+      ],
+      "anchors": {
+        "thu-1230-fb": "thu-1200",
+        "thu-1250-fb": "thu-1245",
+        "thu-1320-fb": "thu-1245",
+        "thu-1345-fb": "thu-1245"
+      },
+      "add": [
+        {
+          "id": "thu-1230-fb",
+          "day": "thu",
+          "time": "12:30",
+          "title": "Oven turkey OUT when at temp",
+          "details": "**Oven turkey OUT** when at temp (breast 160°F / thigh 175°F). Tent with foil + towel, or hold it in the empty cooler with towels. Crack the oven door to drop to **350°F** for the 12:55 casseroles.",
+          "equipment": [
+            "oven"
+          ],
+          "recipeIds": [
+            "turkeys"
+          ],
+          "critical": true,
+          "headsUpMin": 5,
+          "devices": [
+            {
+              "device": "oven",
+              "unload": "all",
+              "set": 350
+            }
+          ]
+        },
+        {
+          "id": "thu-1250-fb",
+          "day": "thu",
+          "time": "12:50",
+          "title": "Stuffing onto the Traeger, covered",
+          "details": "**Stuffing onto the Traeger, covered**, at 350°F (both pans). Check center reaches 165°F before it comes off.",
+          "equipment": [
+            "traeger"
+          ],
+          "recipeIds": [
+            "stuffing"
+          ],
+          "critical": true,
+          "headsUpMin": 5,
+          "devices": [
+            {
+              "device": "traeger",
+              "load": [
+                {
+                  "id": "thu-traeger-stuffing-1",
+                  "label": "Stuffing pan 1",
+                  "forMin": 55
+                },
+                {
+                  "id": "thu-traeger-stuffing-2",
+                  "label": "Stuffing pan 2",
+                  "forMin": 55
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "thu-1320-fb",
+          "day": "thu",
+          "time": "13:20",
+          "title": "Uncover the stuffing on the Traeger",
+          "details": "**Uncover the stuffing** on the Traeger for its last 20–30 min.",
+          "equipment": [
+            "traeger"
+          ],
+          "recipeIds": [
+            "stuffing"
+          ],
+          "critical": true
+        },
+        {
+          "id": "thu-1345-fb",
+          "day": "thu",
+          "time": "13:45",
+          "title": "Stuffing OFF the Traeger · Traeger OFF",
+          "details": "**Stuffing OUT** of the Traeger (center 165°F); keep covered. Traeger OFF.",
+          "equipment": [
+            "traeger"
+          ],
+          "recipeIds": [
+            "stuffing"
+          ],
+          "critical": true,
+          "headsUpMin": 5,
+          "devices": [
+            {
+              "device": "traeger",
+              "unload": "all",
+              "set": "OFF"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "probeTargets": [
+    {
+      "label": "Turkey breast",
+      "temp": 160,
+      "note": "Carryover takes it to 165°F"
+    },
+    {
+      "label": "Turkey thigh",
+      "temp": 175
+    },
+    {
+      "label": "Stuffing center",
+      "temp": 165
+    }
+  ],
+  "setupChecklist": [
+    "Plug in the laptop and set sleep to Never while plugged in.",
+    "Turn the laptop volume up.",
+    "Keep this tab in front.",
+    "Allow notifications when asked."
+  ]
+}

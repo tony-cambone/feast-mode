@@ -1,0 +1,663 @@
+{
+  "$schema": "./plan.schema.json",
+  "id": "christmas-dinner",
+  "title": "Christmas Dinner",
+  "subtitle": "Example plan: prime rib dinner for 8 at 16:00",
+  "emoji": "🎄",
+  "timeZone": "America/Chicago",
+  "tempUnit": "F",
+  "theme": {
+    "accent": "#b3202a"
+  },
+  "days": [
+    {
+      "id": "eve",
+      "date": "2026-12-24",
+      "label": "Thu 12/24 · Christmas Eve"
+    },
+    {
+      "id": "day",
+      "date": "2026-12-25",
+      "label": "Fri 12/25 · Christmas Day"
+    }
+  ],
+  "devices": [
+    {
+      "id": "oven",
+      "label": "Oven"
+    },
+    {
+      "id": "stove",
+      "label": "Stove"
+    },
+    {
+      "id": "slowcooker",
+      "label": "Slow cooker"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "eve-1000",
+      "day": "eve",
+      "time": "10:00",
+      "title": "Dry-brine the prime rib",
+      "details": "**Dry-brine the prime rib:** pat dry, rub all over with kosher salt, and set it on a rack over a tray, **uncovered**, in the fridge until Christmas morning.",
+      "equipment": [
+        "fridge"
+      ],
+      "recipeIds": [
+        "prime-rib"
+      ],
+      "critical": false
+    },
+    {
+      "id": "eve-1400",
+      "day": "eve",
+      "time": "14:00",
+      "title": "Make the chocolate mousse",
+      "details": "Make the chocolate mousse, spoon into glasses, cover, and chill overnight.",
+      "equipment": [
+        "fridge"
+      ],
+      "recipeIds": [
+        "chocolate-mousse"
+      ],
+      "critical": false
+    },
+    {
+      "id": "eve-1600",
+      "day": "eve",
+      "time": "16:00",
+      "title": "Boil the potatoes",
+      "details": "Peel and cut the potatoes; cover with cold salted water and boil until fork-tender.",
+      "equipment": [
+        "stove"
+      ],
+      "recipeIds": [
+        "mashed"
+      ],
+      "critical": false,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "stove",
+          "set": "HIGH",
+          "load": [
+            {
+              "id": "eve-stove-potatoes",
+              "label": "Potatoes (boil)",
+              "forMin": 25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eve-1630",
+      "day": "eve",
+      "time": "16:30",
+      "title": "Mash potatoes · stove off",
+      "details": "Drain, steam-dry, mash with butter, cream cheese and cream. Into the buttered slow-cooker insert, cover, fridge. **Stove off.**",
+      "equipment": [
+        "stove",
+        "fridge"
+      ],
+      "recipeIds": [
+        "mashed"
+      ],
+      "critical": false,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "stove",
+          "unload": "all",
+          "set": "OFF"
+        }
+      ]
+    },
+    {
+      "id": "eve-2100",
+      "day": "eve",
+      "time": "21:00",
+      "title": "Bedtime fridge check",
+      "details": "**Bedtime fridge check:** rib uncovered on its rack; mousse and potatoes covered; green beans trimmed and bagged; stock and rolls ready.",
+      "equipment": [
+        "fridge"
+      ],
+      "critical": true
+    },
+    {
+      "id": "day-0930",
+      "day": "day",
+      "time": "09:30",
+      "title": "Prime rib out of the fridge",
+      "details": "**Prime rib out of the fridge** to come up to room temperature (about 2 hr). Do not salt again. Tie it if it is not already tied.",
+      "equipment": [
+        "counter"
+      ],
+      "recipeIds": [
+        "prime-rib"
+      ],
+      "critical": true
+    },
+    {
+      "id": "day-1130",
+      "day": "day",
+      "time": "11:30",
+      "title": "Oven to 225°F",
+      "details": "Oven to **225°F**, rack in the lower-middle position.",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "prime-rib"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "set": 225
+        }
+      ]
+    },
+    {
+      "id": "day-1200",
+      "day": "day",
+      "time": "12:00",
+      "title": "Prime rib into the oven",
+      "details": "**Prime rib into the 225°F oven**, fat side up, probe in the center, not touching bone. Roast until **120°F** (about 3 hr).",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "prime-rib"
+      ],
+      "fallbackIds": [
+        "roast-timing"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "load": [
+            {
+              "id": "day-oven-rib",
+              "label": "Prime rib (roast)",
+              "forMin": 180
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "day-1300",
+      "day": "day",
+      "time": "13:00",
+      "title": "Mashed potatoes into the slow cooker",
+      "details": "Mashed potatoes into the slow cooker on **LOW** with 2 tbsp butter on top.",
+      "equipment": [
+        "slowcooker"
+      ],
+      "recipeIds": [
+        "mashed"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "slowcooker",
+          "set": "LOW",
+          "load": [
+            {
+              "id": "day-sc-mashed",
+              "label": "Mashed potatoes"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "day-1330",
+      "day": "day",
+      "time": "13:30",
+      "title": "Stir the mashed potatoes",
+      "details": "**Repeat every 30 min:** stir the potatoes; add warm cream if stiff.",
+      "equipment": [
+        "slowcooker"
+      ],
+      "recipeIds": [
+        "mashed"
+      ],
+      "critical": false,
+      "repeatEveryMin": 30,
+      "repeatUntil": "15:30"
+    },
+    {
+      "id": "day-1415",
+      "day": "day",
+      "time": "14:15",
+      "title": "Start the au jus",
+      "details": "Simmer the stock with the onion, carrot and thyme; keep it at a gentle simmer.",
+      "equipment": [
+        "stove"
+      ],
+      "recipeIds": [
+        "au-jus"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "stove",
+          "set": "MED",
+          "load": [
+            {
+              "id": "day-stove-jus",
+              "label": "Au jus (stock)",
+              "forMin": 75
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "day-1430",
+      "day": "day",
+      "time": "14:30",
+      "title": "Check the prime rib temp",
+      "details": "Check the rib: **pull at 120°F** in the center. If it is early, leave the oven door shut; if it is slow, see Problems.",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "prime-rib"
+      ],
+      "fallbackIds": [
+        "roast-timing"
+      ],
+      "critical": true
+    },
+    {
+      "id": "day-1500",
+      "day": "day",
+      "time": "15:00",
+      "title": "Prime rib OUT · oven to 425°F · beans in",
+      "details": "**Prime rib OUT** at 120°F. Tent loosely with foil and rest **40 min**; save the drippings for the jus. Oven up to **425°F**; green beans in, 25 min.",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "prime-rib",
+        "green-beans"
+      ],
+      "fallbackIds": [
+        "roast-timing"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "unload": "all",
+          "set": 425,
+          "load": [
+            {
+              "id": "day-oven-beans",
+              "label": "Green beans",
+              "forMin": 25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "day-1525",
+      "day": "day",
+      "time": "15:25",
+      "title": "Beans out · rolls in",
+      "details": "Green beans out, tent to keep warm. **Rolls in**, about 8 min.",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "green-beans",
+        "rolls"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "unload": "all",
+          "load": [
+            {
+              "id": "day-oven-rolls",
+              "label": "Dinner rolls",
+              "forMin": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "day-1533",
+      "day": "day",
+      "time": "15:33",
+      "title": "Rolls out · oven to 500°F",
+      "details": "Rolls out and into a towel-lined basket. Oven to **500°F** for the sear.",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "rolls",
+        "prime-rib"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "unload": "all",
+          "set": 500
+        }
+      ]
+    },
+    {
+      "id": "day-1540",
+      "day": "day",
+      "time": "15:40",
+      "title": "Prime rib back in to sear",
+      "details": "**Sear:** prime rib back into the 500°F oven for 8 min, until the crust is deep brown.",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "prime-rib"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "load": [
+            {
+              "id": "day-oven-sear",
+              "label": "Prime rib (sear)",
+              "forMin": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "day-1548",
+      "day": "day",
+      "time": "15:48",
+      "title": "Rib out · oven off",
+      "details": "**Prime rib out. Oven off.** Rest 10 min before carving.",
+      "equipment": [
+        "oven"
+      ],
+      "recipeIds": [
+        "prime-rib"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "oven",
+          "unload": "all",
+          "set": "OFF"
+        }
+      ]
+    },
+    {
+      "id": "day-1550",
+      "day": "day",
+      "time": "15:50",
+      "title": "Carve the prime rib",
+      "details": "Whisk the drippings into the jus and strain. Carve the rib: cut the bones off, then slice across the grain.",
+      "equipment": [
+        "counter"
+      ],
+      "recipeIds": [
+        "prime-rib",
+        "au-jus"
+      ],
+      "critical": true
+    },
+    {
+      "id": "day-1555",
+      "day": "day",
+      "time": "15:55",
+      "title": "To the table · stove and slow cooker off",
+      "details": "Jus into a warm pitcher, potatoes to the table. **Slow cooker and stove off.**",
+      "equipment": [
+        "stove",
+        "slowcooker"
+      ],
+      "critical": true,
+      "headsUpMin": 5,
+      "devices": [
+        {
+          "device": "slowcooker",
+          "unload": "all",
+          "set": "OFF"
+        },
+        {
+          "device": "stove",
+          "unload": "all",
+          "set": "OFF"
+        }
+      ]
+    },
+    {
+      "id": "day-1600",
+      "day": "day",
+      "time": "16:00",
+      "title": "Dinner! 🎄",
+      "details": "**Dinner is served.**",
+      "critical": true
+    },
+    {
+      "id": "day-1730",
+      "day": "day",
+      "time": "17:30",
+      "title": "Dessert out of the fridge",
+      "details": "Chocolate mousse out of the fridge.",
+      "equipment": [
+        "fridge"
+      ],
+      "recipeIds": [
+        "chocolate-mousse"
+      ],
+      "critical": false
+    },
+    {
+      "id": "day-1830",
+      "day": "day",
+      "time": "18:30",
+      "title": "Leftovers into the fridge",
+      "details": "Leftovers into the fridge (food safety: within about 2 hr).",
+      "equipment": [
+        "fridge"
+      ],
+      "critical": false
+    }
+  ],
+  "recipes": [
+    {
+      "id": "prime-rib",
+      "name": "Reverse-sear prime rib",
+      "yield": "8 servings (5-bone, about 10 lb)",
+      "when": "Dry-brine Dec 24; roast Dec 25 from 12:00",
+      "ingredients": [
+        "1 bone-in prime rib roast, about 10 lb",
+        "3 tbsp kosher salt",
+        "1 tbsp black pepper",
+        "4 cloves garlic, minced",
+        "2 tbsp softened butter",
+        "1 tbsp chopped rosemary"
+      ],
+      "steps": [
+        {
+          "heading": "Dec 24"
+        },
+        "Pat dry and rub all over with the salt; rest on a rack, **uncovered**, in the fridge.",
+        {
+          "heading": "Dec 25"
+        },
+        "Out of the fridge about 2 hr before roasting.",
+        "Rub with the pepper, garlic, butter and rosemary.",
+        "Roast at 225°F until the center reads **120°F** (about 3 hr).",
+        "Tent and rest 40 min.",
+        "Oven to 500°F; sear 8 min until browned. Rest 10 min and carve."
+      ],
+      "notes": [
+        "Go by the probe, not the clock."
+      ]
+    },
+    {
+      "id": "au-jus",
+      "name": "Au jus",
+      "yield": "About 4 cups",
+      "when": "Start Dec 25 14:15",
+      "ingredients": [
+        "4 cups beef stock",
+        "1 onion, quartered",
+        "1 carrot, chopped",
+        "3 sprigs thyme",
+        "Drippings from the roast",
+        "salt and pepper"
+      ],
+      "steps": [
+        "Simmer the stock with the onion, carrot and thyme for about an hour.",
+        "Whisk in the rib drippings (a little at a time, tasting; they are salty).",
+        "Strain, season, and keep warm."
+      ]
+    },
+    {
+      "id": "mashed",
+      "name": "Make-ahead mashed potatoes",
+      "yield": "8 servings",
+      "when": "Make Dec 24; slow cooker Dec 25 from 13:00",
+      "ingredients": [
+        "4 lb Yukon Gold potatoes, peeled",
+        "1 stick butter + 2 tbsp for reheating",
+        "4 oz cream cheese",
+        "1 cup warm cream",
+        "salt and pepper"
+      ],
+      "steps": [
+        "Boil the potatoes in salted water until fork-tender; drain and steam-dry.",
+        "Mash with the butter, cream cheese and cream; season.",
+        "Spread in a buttered slow-cooker insert; refrigerate.",
+        "**Dec 25:** LOW from 13:00 with 2 tbsp butter on top; stir every 30 min."
+      ]
+    },
+    {
+      "id": "green-beans",
+      "name": "Roasted green beans",
+      "yield": "8 servings",
+      "when": "Dec 25 15:00",
+      "ingredients": [
+        "2 lb green beans, trimmed",
+        "3 tbsp olive oil",
+        "1 tsp kosher salt",
+        "½ cup sliced almonds",
+        "zest of 1 lemon"
+      ],
+      "steps": [
+        "Toss the beans with the oil and salt on a sheet pan.",
+        "Roast at 425°F for 25 min, stirring once.",
+        "Top with the almonds and lemon zest."
+      ]
+    },
+    {
+      "id": "rolls",
+      "name": "Dinner rolls",
+      "yield": "16",
+      "when": "Dec 25 15:25",
+      "ingredients": [
+        "16 brown-and-serve dinner rolls (or your own dough, shaped)",
+        "2 tbsp melted butter"
+      ],
+      "steps": [
+        "Brush with the butter.",
+        "Bake at 425°F for about 8 min until golden.",
+        "Wrap in a towel-lined basket to keep warm."
+      ]
+    },
+    {
+      "id": "chocolate-mousse",
+      "name": "No-bake chocolate mousse",
+      "yield": "8 glasses",
+      "when": "Dec 24 14:00",
+      "ingredients": [
+        "8 oz dark chocolate, chopped",
+        "2 cups heavy cream, divided",
+        "2 tbsp sugar",
+        "1 tsp vanilla",
+        "pinch of salt"
+      ],
+      "steps": [
+        "Heat ½ cup of the cream; pour over the chocolate; stir smooth; cool.",
+        "Whip the remaining cream with the sugar, vanilla and salt to soft peaks.",
+        "Fold into the chocolate; spoon into glasses; cover; chill overnight."
+      ]
+    }
+  ],
+  "fallbacks": [
+    {
+      "id": "roast-timing",
+      "title": "Roast running fast or slow",
+      "body": [
+        "Go by the probe, not the clock. Pull the rib at 120°F in the center, even if that is early or late.",
+        "The oven steps after it (beans, rolls, sear) move together; shift the oven lane to keep them in order."
+      ],
+      "relatedTaskIds": [
+        "day-1200",
+        "day-1430",
+        "day-1500"
+      ],
+      "actions": [
+        {
+          "kind": "shiftLane",
+          "lane": "oven",
+          "minutes": -15,
+          "label": "Oven lane −15 min (roast fast)"
+        },
+        {
+          "kind": "shiftLane",
+          "lane": "oven",
+          "minutes": 15,
+          "label": "Oven lane +15 min (roast slow)"
+        },
+        {
+          "kind": "shiftLane",
+          "lane": "oven",
+          "minutes": 30,
+          "label": "Oven lane +30 min (roast slow)"
+        }
+      ]
+    }
+  ],
+  "probeTargets": [
+    {
+      "label": "Prime rib: pull from the oven",
+      "temp": 120,
+      "note": "Carryover plus the sear takes it to about 130°F (medium-rare). Verify against current food-safety guidance; USDA lists 145°F as the safe minimum for whole cuts of beef."
+    },
+    {
+      "label": "Prime rib: after the sear",
+      "temp": 130
+    }
+  ],
+  "setupChecklist": [
+    "Plug in the laptop and turn the volume up.",
+    "Keep this tab in front.",
+    "Allow notifications when asked."
+  ]
+}

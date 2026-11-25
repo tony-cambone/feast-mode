@@ -1,0 +1,35 @@
+{
+  "name": "feast-mode",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Feast Mode: a cook-along for busy home chefs cooking a big holiday meal. Timeline, alarms, equipment board and recipes; bring your own menu as JSON.",
+  "scripts": {
+    "dev": "vite",
+    "start": "vite build && vite preview --port 5173 --strictPort --open",
+    "build": "tsc --noEmit -p tsconfig.json && vite build",
+    "build:single": "vite build --config vite.singlefile.config.ts",
+    "preview": "vite preview --port 5173 --strictPort",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "check-plan": "node scripts/check-plan.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "e2e": "playwright test"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "@types/node": "^26.6.7",
+    "@types/react": "^19.3.1",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "jsdom": "^31.0.1",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vite-plugin-singlefile": "^2.3.4",
+    "vitest": "^5.1.1"
+  }
+}

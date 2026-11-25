@@ -1,0 +1,776 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "plan.schema.json",
+  "title": "Cook-along plan",
+  "description": "A timed cooking plan: days, devices, tasks, recipes. See docs/PLAN_FORMAT.md.",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "timeZone",
+    "days",
+    "devices",
+    "tasks",
+    "recipes"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Editor hint; ignored by the app."
+    },
+    "id": {
+      "type": "string",
+      "description": "Short slug; namespaces saved progress, e.g. \"thanksgiving-2026\".",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "description": "Plan title.",
+      "minLength": 1
+    },
+    "subtitle": {
+      "type": "string",
+      "description": "Optional line under the title."
+    },
+    "emoji": {
+      "type": "string",
+      "description": "Optional emoji for the header and tab icon."
+    },
+    "timeZone": {
+      "type": "string",
+      "description": "IANA time zone, e.g. \"America/New_York\" or \"Europe/London\".",
+      "minLength": 1
+    },
+    "tempUnit": {
+      "enum": [
+        "F",
+        "C"
+      ],
+      "default": "F",
+      "description": "Unit for every numeric temperature in the plan."
+    },
+    "days": {
+      "type": "array",
+      "minItems": 1,
+      "description": "The days of the event, in date order.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "date",
+          "label"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Short slug without spaces, used in task.day (e.g. \"wed\", \"day1\").",
+            "pattern": "^\\S+$"
+          },
+          "date": {
+            "type": "string",
+            "description": "YYYY-MM-DD.",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "label": {
+            "type": "string",
+            "description": "Tab text, e.g. \"Wed 11/25 · Prep\".",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "devices": {
+      "type": "array",
+      "description": "Cooking devices you own, in board order.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Slug without spaces, e.g. \"oven\", \"air-fryer\".",
+            "pattern": "^\\S+$"
+          },
+          "label": {
+            "type": "string",
+            "description": "Display name, e.g. \"Propane grill\".",
+            "minLength": 1
+          },
+          "short": {
+            "type": "string",
+            "description": "Short name for chips and buttons."
+          },
+          "icon": {
+            "type": "string",
+            "description": "Optional single emoji."
+          }
+        }
+      }
+    },
+    "tasks": {
+      "type": "array",
+      "description": "Every timed task, in time order within each day.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "day",
+          "time",
+          "title"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique task id, e.g. \"thu-1200\".",
+            "minLength": 1
+          },
+          "day": {
+            "type": "string",
+            "description": "A days[].id this task belongs to."
+          },
+          "time": {
+            "type": "string",
+            "description": "Start time, 24-hour HH:MM in the plan time zone.",
+            "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+            "examples": [
+              "07:05",
+              "13:30"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "description": "Short, scannable title (about 40 characters or fewer).",
+            "minLength": 1
+          },
+          "details": {
+            "type": "string",
+            "description": "Full instruction shown in the alert. **bold** is supported."
+          },
+          "equipment": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Display tags: device ids or places like \"fridge\", \"counter\". Only used for \"running late\" lanes when the task has no \"devices\"."
+          },
+          "devices": {
+            "type": "array",
+            "description": "What this task does to each cooking device. Drives the equipment board and the running-late lanes. Within a task: unload, then set, then load.",
+            "items": {
+              "$ref": "#/$defs/deviceAction"
+            }
+          },
+          "recipeIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "recipes[].id values this task links to."
+          },
+          "fallbackIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "fallbacks[].id values shown as \"Problems?\" links on this task."
+          },
+          "alert": {
+            "enum": [
+              "modal",
+              "quiet"
+            ],
+            "description": "\"modal\" (default) = full-screen alert with looping sound. \"quiet\" = list and small toast only."
+          },
+          "headsUpMin": {
+            "type": "number",
+            "minimum": 0,
+            "description": "Extra heads-up alert this many minutes before; 0 means none. Use 5 on every task that loads or unloads a device."
+          },
+          "critical": {
+            "type": "boolean",
+            "description": "Red, loud alarm. Use for anything that can burn, overcook or undercook."
+          },
+          "repeatEveryMin": {
+            "type": "number",
+            "exclusiveMinimum": 0,
+            "description": "Repeat the task every N minutes (e.g. stirring), from \"time\" until \"repeatUntil\"."
+          },
+          "repeatUntil": {
+            "type": "string",
+            "description": "Last repeat time, inclusive; must not be before \"time\".",
+            "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+            "examples": [
+              "07:05",
+              "13:30"
+            ]
+          }
+        }
+      }
+    },
+    "recipes": {
+      "type": "array",
+      "description": "Recipe cards.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "ingredients",
+          "steps"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Recipe slug.",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "description": "Recipe title.",
+            "minLength": 1
+          },
+          "yield": {
+            "type": "string",
+            "description": "E.g. \"Serves 6\"."
+          },
+          "when": {
+            "type": "string",
+            "description": "When it is made."
+          },
+          "ingredients": {
+            "type": "array",
+            "description": "One ingredient per line; {\"heading\"} for sub-sections.",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "heading"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "heading": {
+                      "type": "string",
+                      "description": "Sub-heading (not checkable).",
+                      "minLength": 1
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "steps": {
+            "type": "array",
+            "description": "One step per line; **bold** supported.",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "heading"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "heading": {
+                      "type": "string",
+                      "description": "Sub-heading (not checkable).",
+                      "minLength": 1
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Extra notes."
+          }
+        }
+      }
+    },
+    "fallbacks": {
+      "type": "array",
+      "description": "The \"Problems?\" panel entries.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "body",
+          "relatedTaskIds",
+          "actions"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Fallback slug."
+          },
+          "title": {
+            "type": "string",
+            "description": "Problem, e.g. \"Oven turkey not at temp by 12:00\"."
+          },
+          "body": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Paragraphs of advice."
+          },
+          "relatedTaskIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tasks that link to this fallback."
+          },
+          "actions": {
+            "type": "array",
+            "description": "One-tap actions.",
+            "items": {
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": [
+                    "kind",
+                    "label",
+                    "variantId"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "kind": {
+                      "const": "variant"
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Button text."
+                    },
+                    "variantId": {
+                      "type": "string",
+                      "description": "variants[].id to switch on."
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "kind",
+                    "label",
+                    "lane",
+                    "minutes"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "kind": {
+                      "const": "shiftLane"
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Button text."
+                    },
+                    "lane": {
+                      "type": "string",
+                      "description": "A devices[].id; shifts that device's remaining tasks today."
+                    },
+                    "minutes": {
+                      "type": "number",
+                      "description": "Minutes to shift (negative = earlier)."
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": [
+                    "kind",
+                    "label",
+                    "taskIds",
+                    "minutes"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "kind": {
+                      "const": "shiftTasks"
+                    },
+                    "label": {
+                      "type": "string",
+                      "description": "Button text."
+                    },
+                    "taskIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Tasks to shift."
+                    },
+                    "minutes": {
+                      "type": "number",
+                      "description": "Minutes to shift (negative = earlier)."
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    "variants": {
+      "type": "array",
+      "description": "Named sets of task changes, switched on by a fallback action.",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Variant slug."
+          },
+          "label": {
+            "type": "string",
+            "description": "Human label."
+          },
+          "override": {
+            "type": "object",
+            "description": "taskId -> fields to replace on that task.",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {
+                "day": {
+                  "type": "string",
+                  "description": "A days[].id this task belongs to."
+                },
+                "time": {
+                  "type": "string",
+                  "description": "Start time, 24-hour HH:MM in the plan time zone.",
+                  "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+                  "examples": [
+                    "07:05",
+                    "13:30"
+                  ]
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Short, scannable title (about 40 characters or fewer).",
+                  "minLength": 1
+                },
+                "details": {
+                  "type": "string",
+                  "description": "Full instruction shown in the alert. **bold** is supported."
+                },
+                "equipment": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Display tags: device ids or places like \"fridge\", \"counter\". Only used for \"running late\" lanes when the task has no \"devices\"."
+                },
+                "devices": {
+                  "type": "array",
+                  "description": "What this task does to each cooking device. Drives the equipment board and the running-late lanes. Within a task: unload, then set, then load.",
+                  "items": {
+                    "$ref": "#/$defs/deviceAction"
+                  }
+                },
+                "recipeIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "recipes[].id values this task links to."
+                },
+                "fallbackIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "fallbacks[].id values shown as \"Problems?\" links on this task."
+                },
+                "alert": {
+                  "enum": [
+                    "modal",
+                    "quiet"
+                  ],
+                  "description": "\"modal\" (default) = full-screen alert with looping sound. \"quiet\" = list and small toast only."
+                },
+                "headsUpMin": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "Extra heads-up alert this many minutes before; 0 means none. Use 5 on every task that loads or unloads a device."
+                },
+                "critical": {
+                  "type": "boolean",
+                  "description": "Red, loud alarm. Use for anything that can burn, overcook or undercook."
+                },
+                "repeatEveryMin": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "description": "Repeat the task every N minutes (e.g. stirring), from \"time\" until \"repeatUntil\"."
+                },
+                "repeatUntil": {
+                  "type": "string",
+                  "description": "Last repeat time, inclusive; must not be before \"time\".",
+                  "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+                  "examples": [
+                    "07:05",
+                    "13:30"
+                  ]
+                }
+              }
+            }
+          },
+          "remove": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Task ids hidden while active."
+          },
+          "add": {
+            "type": "array",
+            "description": "Extra tasks while active. Use ids ending in \"-fb\".",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "day",
+                "time",
+                "title"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique task id, e.g. \"thu-1200\".",
+                  "minLength": 1
+                },
+                "day": {
+                  "type": "string",
+                  "description": "A days[].id this task belongs to."
+                },
+                "time": {
+                  "type": "string",
+                  "description": "Start time, 24-hour HH:MM in the plan time zone.",
+                  "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+                  "examples": [
+                    "07:05",
+                    "13:30"
+                  ]
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Short, scannable title (about 40 characters or fewer).",
+                  "minLength": 1
+                },
+                "details": {
+                  "type": "string",
+                  "description": "Full instruction shown in the alert. **bold** is supported."
+                },
+                "equipment": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Display tags: device ids or places like \"fridge\", \"counter\". Only used for \"running late\" lanes when the task has no \"devices\"."
+                },
+                "devices": {
+                  "type": "array",
+                  "description": "What this task does to each cooking device. Drives the equipment board and the running-late lanes. Within a task: unload, then set, then load.",
+                  "items": {
+                    "$ref": "#/$defs/deviceAction"
+                  }
+                },
+                "recipeIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "recipes[].id values this task links to."
+                },
+                "fallbackIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "fallbacks[].id values shown as \"Problems?\" links on this task."
+                },
+                "alert": {
+                  "enum": [
+                    "modal",
+                    "quiet"
+                  ],
+                  "description": "\"modal\" (default) = full-screen alert with looping sound. \"quiet\" = list and small toast only."
+                },
+                "headsUpMin": {
+                  "type": "number",
+                  "minimum": 0,
+                  "description": "Extra heads-up alert this many minutes before; 0 means none. Use 5 on every task that loads or unloads a device."
+                },
+                "critical": {
+                  "type": "boolean",
+                  "description": "Red, loud alarm. Use for anything that can burn, overcook or undercook."
+                },
+                "repeatEveryMin": {
+                  "type": "number",
+                  "exclusiveMinimum": 0,
+                  "description": "Repeat the task every N minutes (e.g. stirring), from \"time\" until \"repeatUntil\"."
+                },
+                "repeatUntil": {
+                  "type": "string",
+                  "description": "Last repeat time, inclusive; must not be before \"time\".",
+                  "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+                  "examples": [
+                    "07:05",
+                    "13:30"
+                  ]
+                }
+              }
+            }
+          },
+          "anchors": {
+            "type": "object",
+            "description": "addedTaskId -> taskId. Each added task inherits its anchor's running-late shift.",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "probeTargets": {
+      "type": "array",
+      "description": "Thermometer targets.",
+      "items": {
+        "type": "object",
+        "required": [
+          "label",
+          "temp"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "label": {
+            "type": "string",
+            "description": "E.g. \"Turkey breast\"."
+          },
+          "temp": {
+            "type": "number",
+            "description": "Target in tempUnit."
+          },
+          "note": {
+            "type": "string",
+            "description": "Optional note."
+          }
+        }
+      }
+    },
+    "setupChecklist": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "One-time setup banner items."
+    },
+    "theme": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "accent": {
+          "type": "string",
+          "description": "CSS accent colour."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "deviceAction": {
+      "type": "object",
+      "required": [
+        "device"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "device": {
+          "type": "string",
+          "description": "A devices[].id."
+        },
+        "set": {
+          "description": "Setpoint: a number (temperature in tempUnit) or a dial label such as \"LOW\", \"MED-HIGH\". \"OFF\" turns the device off and clears it.",
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string",
+              "minLength": 1
+            }
+          ]
+        },
+        "load": {
+          "type": "array",
+          "description": "Items placed in/on the device.",
+          "items": {
+            "type": "object",
+            "required": [
+              "id",
+              "label"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique across the plan, e.g. \"thu-oven-turkey\".",
+                "minLength": 1
+              },
+              "label": {
+                "type": "string",
+                "description": "Short name for the board.",
+                "minLength": 1
+              },
+              "forMin": {
+                "type": "number",
+                "exclusiveMinimum": 0,
+                "description": "Expected minutes in the device."
+              }
+            }
+          }
+        },
+        "unload": {
+          "description": "\"all\" or the ids of previously loaded items.",
+          "oneOf": [
+            {
+              "const": "all"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Item ids."
+            }
+          ]
+        }
+      }
+    }
+  }
+}
